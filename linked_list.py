@@ -1,8 +1,10 @@
 class _Node:
     """ Internal class. Not for public use. """
+
     def __init__(self, data=None):
         self.data = data
         self.next = None
+
 
 class LinkedList:
 
@@ -44,8 +46,10 @@ class LinkedList:
         """
         Returns data with specified index
         and erases this data from linked list.
+
+        :argument index - integer >= 0
         """
-        if index >= self.__len__():
+        if index < 0 or index >= self.__len__():
             print("ERROR: 'pop' index {} is out of range".format(index))
             return
         current_index = 0
@@ -65,6 +69,28 @@ class LinkedList:
         No arguments.
         """
         self.head.next = None
+
+    def append_list(self, data):
+        """
+        Places new data from list at the end of the linked list.
+
+        Arguments:
+        data -- any list.
+        """
+        try:
+            _ = iter(data)
+        except TypeError:
+            print("ERROR: list is not iterable")
+            return
+        if len(data) == 0:
+            print("ERROR: empty list")
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        for i in data:
+            current.next = _Node(i)
+            current = current.next
 
     def __str__(self):
         """
