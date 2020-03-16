@@ -21,7 +21,7 @@ class Stack:
 
     def peek(self):
         """
-        Return data from top the stack.
+        Return data from top of the stack.
         Return None if stack is empty.
         Time complexity = O(1).
         """
