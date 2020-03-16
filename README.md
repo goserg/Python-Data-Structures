@@ -27,7 +27,14 @@ My implementation of some basic Data Structures from scratch.
 - is_empty  
 - clear  
 
+4. Heap (min)  
+- append  
+- peek  
+- pop  
+- is_empty  
+- clear  
+
+
 TODO:  
-* Heap  
 * Double Linked List  
 * Circular Linked List  
