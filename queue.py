@@ -21,6 +21,7 @@ class Queue:
         """
         self.head = _Node()
         self.tail = _Node()
+        self.tail.prev = self.head
         self.size = 0
 
     def push(self, data):
@@ -34,7 +35,7 @@ class Queue:
             new_node.next.prev = new_node
         self.head.next = new_node
         new_node.prev = self.head
-        if self.tail.prev is None:
+        if self.tail.prev == self.head:
             self.tail.prev = new_node
         self.size += 1
 
@@ -90,7 +91,7 @@ class Queue:
         """
         Remove all data from the stack.
         """
-        self.tail.prev = None
+        self.tail.prev = self.head
         self.head.next = None
         self.size = 0
 
