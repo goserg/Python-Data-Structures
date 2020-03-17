@@ -27,14 +27,22 @@ class TestHeap(unittest.TestCase):
         self.assertEqual(self.heap.heap, [])
 
     def test_is_empty(self):
-        self.assertEqual(self.heap.is_empty(), False)
+        self.assertFalse(self.heap.is_empty())
         self.heap.heap = []
-        self.assertEqual(self.heap.is_empty(), True)
+        self.assertTrue(self.heap.is_empty())
 
     def test_clear(self):
         self.assertNotEqual(self.heap.heap, [])
         self.heap.clear()
         self.assertEqual(self.heap.heap, [])
+
+    def test_big_test(self):
+        self.heap.clear()
+        test_case = 100_000
+        for i in reversed(range(test_case)):
+            self.heap.append(i)
+        for i in range(test_case):
+            self.assertEqual(self.heap.pop(), i)
 
 
 if __name__ == "__main__":

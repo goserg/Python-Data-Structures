@@ -11,7 +11,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.pop(), 1)
         self.assertEqual(self.stack.stack, [])
         self.stack.stack = []
-        self.assertEqual(self.stack.pop(), None)
+        self.assertIsNone(self.stack.pop())
         self.assertEqual(self.stack.stack, [])
         self.stack.stack = [1, 2, 3]
         self.assertEqual(self.stack.pop(), 3)
@@ -26,7 +26,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.stack, [1, 2.0, "3"])
 
     def test_peek(self):
-        self.assertEqual(self.stack.peek(), None)
+        self.assertIsNone(self.stack.peek())
         self.stack.stack = [1]
         self.assertEqual(self.stack.peek(), 1)
         self.stack.stack = [1, 2, 3]
@@ -34,7 +34,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.stack, [1, 2, 3])
 
     def test_search(self):
-        self.assertEqual(self.stack.search(1), None)
+        self.assertIsNone(self.stack.search(1))
         self.stack.stack = [1]
         self.assertEqual(self.stack.search(1), 1)
         self.stack.stack = [1, 2, 3]
@@ -43,11 +43,11 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.search(3), 1)
 
     def test_is_empty(self):
-        self.assertEqual(self.stack.is_empty(), True)
+        self.assertTrue(self.stack.is_empty())
         self.stack.stack = [1]
-        self.assertEqual(self.stack.is_empty(), False)
+        self.assertFalse(self.stack.is_empty())
         self.stack.stack = [1, 2, 3]
-        self.assertEqual(self.stack.is_empty(), False)
+        self.assertFalse(self.stack.is_empty())
 
     def test_clear(self):
         self.stack.stack = [1, 2, 3]
@@ -61,6 +61,14 @@ class TestStack(unittest.TestCase):
     def test___len__(self):
         self.stack.stack = [1, 2, 3]
         self.assertEqual(len(self.stack), 3)
+
+    def test_big_test(self):
+        test_case = 1_000_000
+        for i in range(test_case):
+            self.stack.push(i)
+        for i in reversed(range(test_case)):
+            self.assertEqual(self.stack.pop(), i)
+        self.assertIsNone(self.stack.pop())
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ class Heap:
         parent_i = (i - 1) // 2
         while parent_i >= 0 and self.heap[parent_i] > self.heap[i]:
             self.heap[parent_i], self.heap[i] = self.heap[i], self.heap[parent_i]
-            i, parent_i = parent_i, (i - 1) // 2
+            i, parent_i = parent_i, (parent_i - 1) // 2
 
     def is_empty(self):
         """
