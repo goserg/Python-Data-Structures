@@ -34,6 +34,14 @@ My implementation of some basic Data Structures from scratch.
 - is_empty  
 - clear  
 
+5. Hash Table  
+- from_keys (static constructor)
+- insert  
+- search  
+- pop  
+- clear  
+- [] sintax
+
 
 TODO:  
 * Double Linked List  
