@@ -14,8 +14,11 @@ class HashTable:
     @staticmethod
     def from_keys(*args):
         ht = HashTable()
+        value = None
+        if len(args) > 1:
+            value = args[1]
         for i in args[0]:
-            ht[i] = args[1]
+            ht[i] = value
         return ht
 
     def __init__(self, *args, **kwargs) -> None:
@@ -96,3 +99,6 @@ class HashTable:
                 b = ''.join(["'", b, "'"]) if isinstance(b, str) else str(b)
                 data.append(': '.join([a, b]))
         return '{' + ', '.join(data) + '}'
+
+    def __len__(self) -> int:
+        return self.size
