@@ -30,7 +30,7 @@ class TestHashTable(unittest.TestCase):
 
     def test_insert_search_pop_len(self):
         ht = HashTable()
-        test_case = 1000
+        test_case = 100_000
         for i in range(test_case):
             ht.insert(i, i*2)
         self.assertIsNone(ht.search("Uno"))
@@ -59,6 +59,18 @@ class TestHashTable(unittest.TestCase):
         ht[1] = 3
         self.assertEqual(ht[1], 3)
         self.assertEqual(len(ht), 1)
+
+    def test_keys(self):
+        ht = HashTable()
+        ht["1"] = 2
+        ht["2"] = 3
+        self.assertEqual(ht.keys(), ["2", "1"])
+
+    def test_values(self):
+        ht = HashTable()
+        ht["1"] = 2
+        ht["2"] = 3
+        self.assertEqual(ht.values(), [3, 2])
 
 
 if __name__ == "__main__":

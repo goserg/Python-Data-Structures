@@ -13,6 +13,18 @@ class _Data:
 class HashTable:
     @staticmethod
     def from_keys(*args):
+        """
+        Returns Hash Table filled with data from args
+
+        Time complexity = O(n).
+
+        Arguments:
+            list of keys, value (value default: None)
+
+        Example:
+            hash_table = HashTable.from_keys(["Bob", "Mary"], 20)
+            returns hash table {'Bob': 20, 'Mary': 20}
+        """
         ht = HashTable()
         value = None
         if len(args) > 1:
@@ -22,6 +34,20 @@ class HashTable:
         return ht
 
     def __init__(self, *args, **kwargs) -> None:
+        """
+        Default constructor
+
+        Time complexity = O(n).
+
+        Arguments:
+            list of tuples (key, value), keyword arguments (key=value)
+
+        Example:
+            hash_table = HashTable([("Bob", 20), ("Mary", 10)])
+            or
+            hash_table = HashTable(Bob=20, Mary=10)
+            returns hash table {'Bob': 20, 'Mary': 10}
+        """
         self.table = [[] for _ in range(INITIAL_SIZE)]
         self.size = 0
 
@@ -33,6 +59,11 @@ class HashTable:
             self.insert(key, value)
 
     def insert(self, key, value=None) -> None:
+        """
+        Insert key with a value. If key is in the hash table updates the value of that key.
+
+        Time complexity = O(1).
+        """
         index = self._get_index_and_hash(key)
         for i, data in enumerate(self.table[index]):
             if data.key == key:
@@ -47,6 +78,11 @@ class HashTable:
         self.insert(key, value)
 
     def search(self, key):
+        """
+        Return the value for key if key is in the hash table, else None.
+
+        Time complexity = O(1).
+        """
         index = self._get_index_and_hash(key)
         for data in self.table[index]:
             if data.key == key:
@@ -56,6 +92,12 @@ class HashTable:
         return self.search(key)
 
     def pop(self, key) -> None:
+        """
+        Return the value for key if key is in the hash table, else None.
+        Removes key from the hash table.
+
+        Time complexity = O(1).
+        """
         index = self._get_index_and_hash(key)
         for i, data in enumerate(self.table[index]):
             if data.key == key:
@@ -63,7 +105,41 @@ class HashTable:
                 self.size -= 1
                 return value
 
+    def keys(self) -> list:
+        """
+        Return a copy of the hash table’s list of keys.
+        Time complexity = O(n).
+
+        No arguments.
+        """
+        keys = []
+        for i in self.table:
+            for j in i:
+                keys.append(j.key)
+        return keys
+
+    def values(self) -> list:
+        """
+        Return a copy of the hash table’s list of values.
+
+        Time complexity = O(n).
+
+        No arguments.
+        """
+        values = []
+        for i in self.table:
+            for j in i:
+                values.append(j.value)
+        return values
+
     def clear(self) -> None:
+        """
+        Clears hash table's data.
+
+        Time complexity = O(1).
+
+        No arguments.
+        """
         self.__init__()
 
     def _get_index_and_hash(self, key) -> int:
