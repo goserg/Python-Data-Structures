@@ -42,7 +42,13 @@ My implementation of some basic Data Structures from scratch.
 - clear  
 - [] sintax
 
+6. Doubly Linked List  
+- add_first  
+- append  
+- get  
+- pop  
+- clear  
+
 
 TODO:  
-* Double Linked List  
 * Circular Linked List  
