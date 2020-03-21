@@ -6,7 +6,7 @@ class TestLinkedList(unittest.TestCase):
     def setUp(self):
         self.ll = LinkedList()
 
-    def test_sdd_first(self):
+    def test_add_first(self):
         self.ll.add_first(1)
         self.assertEqual(self.ll.__str__(), "[1]")
         self.ll.add_first(2)
