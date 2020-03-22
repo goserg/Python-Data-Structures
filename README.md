@@ -49,6 +49,10 @@ My implementation of some basic Data Structures from scratch.
 - pop  
 - clear  
 
-
-TODO:  
-* Circular Linked List  
+7. Circular Linked List  
+- add_first  
+- append  
+- get  
+- pop  
+- clear  
+- step  
