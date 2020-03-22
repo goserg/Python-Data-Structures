@@ -56,3 +56,16 @@ My implementation of some basic Data Structures from scratch.
 - pop  
 - clear  
 - step  
+
+
+Time complexity:  
+
+ data structure | Add first | Add last | Delete first | Delete last | Delete middle | Get first | Get last | Get middle
+- | - | - | - | - | - | - | - | -
+Stack | - | О(1) | - | О(1) | - | О(1) | О(n) | О(n)
+Queue | О(1) | - | - | О(1) | - | О(n) | О(1) | О(n)
+Heap | О(log n) | - | О(log n) | - | - | О(1) | - | -
+Linked list | О(1) | О(n) | О(1) | О(n) | О(n) | О(1) | О(n) | О(n)
+Doubly linked list | О(1) | О(1) | О(1) | О(n) | О(n) | О(1) | О(n) | О(n)
+Circular linked list | О(1) | О(1) | О(1) | О(n) | О(n) | О(1) | О(n) | О(n)
+
