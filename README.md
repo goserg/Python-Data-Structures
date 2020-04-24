@@ -9,7 +9,6 @@ My implementation of some basic Data Structures from scratch.
 - get  
 - pop  
 - clear  
-- append_list  
 	
 2. Stack(list based):  
 - push  
