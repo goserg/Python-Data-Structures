@@ -3,7 +3,7 @@ from src.hash.hash_table import HashTable
 
 
 class TestHashTable(unittest.TestCase):
-    def test_from_keys(self):
+    def test_from_keys(self) -> None:
         ht = HashTable.from_keys(['a', 'b'])
         self.assertIsNone(ht.pop("a"))
         self.assertIsNone(ht.pop("b"))
@@ -11,7 +11,7 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(ht.pop("a"), 100)
         self.assertEqual(ht.pop("b"), 100)
 
-    def test_constructor(self):
+    def test_constructor(self) -> None:
         ht = HashTable(alpha=1, beta=0.9, gamma="ray")
         self.assertEqual(ht.pop("alpha"), 1)
         self.assertEqual(ht.pop("beta"), 0.9)
@@ -28,9 +28,9 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(ht.pop("epsilon"), 0)
         self.assertEqual(ht.pop("zeta"), "Riemann")
 
-    def test_insert_search_pop_len(self):
+    def test_insert_search_pop_len(self) -> None:
         ht = HashTable()
-        test_case = 100_000
+        test_case = 1_000
         for i in range(test_case):
             ht.insert(i, i*2)
         self.assertIsNone(ht.search("Uno"))
@@ -42,7 +42,7 @@ class TestHashTable(unittest.TestCase):
             self.assertEqual(len(ht), test_case)
             self.assertIsNone(ht.pop(j))
 
-    def test_clear(self):
+    def test_clear(self) -> None:
         ht = HashTable()
         self.assertEqual(len(ht), 0)
         ht[1] = 2
@@ -51,7 +51,7 @@ class TestHashTable(unittest.TestCase):
         ht.clear()
         self.assertEqual(len(ht), 0)
 
-    def test_changing(self):
+    def test_changing(self) -> None:
         ht = HashTable()
         ht[1] = 2
         self.assertEqual(ht[1], 2)
@@ -60,13 +60,13 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(ht[1], 3)
         self.assertEqual(len(ht), 1)
 
-    def test_keys(self):
+    def test_keys(self) -> None:
         ht = HashTable()
         ht["1"] = 2
         ht["2"] = 3
         self.assertEqual(ht.keys(), ["2", "1"])
 
-    def test_values(self):
+    def test_values(self) -> None:
         ht = HashTable()
         ht["1"] = 2
         ht["2"] = 3

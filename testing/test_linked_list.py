@@ -3,46 +3,57 @@ from src.linked_list import LinkedList
 
 
 class TestLinkedList(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.ll = LinkedList()
 
-    def test_add_first(self):
+    def test_add_first(self) -> None:
         self.ll.add_first(1)
-        self.assertEqual(self.ll.__str__(), "[1]")
+        self.assertEqual(self.ll.__repr__(), "[1]")
         self.ll.add_first(2)
-        self.assertEqual(self.ll.__str__(), "[2, 1]")
+        self.assertEqual(self.ll.__repr__(), "[2, 1]")
         self.ll.add_first(3)
-        self.assertEqual(self.ll.__str__(), "[3, 2, 1]")
+        self.assertEqual(self.ll.__repr__(), "[3, 2, 1]")
 
-    def test_append(self):
+    def test_append(self) -> None:
         self.ll.append(1)
-        self.assertEqual(self.ll.__str__(), "[1]")
+        self.assertEqual(self.ll.__repr__(), "[1]")
         self.ll.append(2)
-        self.assertEqual(self.ll.__str__(), "[1, 2]")
+        self.assertEqual(self.ll.__repr__(), "[1, 2]")
         self.ll.append(3)
-        self.assertEqual(self.ll.__str__(), "[1, 2, 3]")
+        self.assertEqual(self.ll.__repr__(), "[1, 2, 3]")
 
-    def test_get(self):
-        self.assertIsNone(self.ll.get(0))
+    def test_get(self) -> None:
+        with self.assertRaises(IndexError) as context:
+            self.ll.get(0)
+            self.assertTrue("Index is out of range" in context.exception)
         self.ll.append(1)
         self.assertEqual(self.ll.get(0), 1)
-        self.assertIsNone(self.ll.get(1))
+        with self.assertRaises(IndexError) as context:
+            self.ll.get(1)
+            self.assertTrue("Index is out of range" in context.exception)
         self.ll.append(2)
-        self.assertIsNone(self.ll.get(-1))
         self.assertEqual(self.ll.get(0), 1)
         self.assertEqual(self.ll.get(1), 2)
-        self.assertIsNone(self.ll.get(2))
+        with self.assertRaises(IndexError) as context:
+            self.ll.get(2)
+            self.assertTrue("Index is out of range" in context.exception)
         self.ll.add_first(3)
         self.assertEqual(self.ll.get(0), 3)
         self.assertEqual(self.ll.get(1), 1)
         self.assertEqual(self.ll.get(2), 2)
-        self.assertIsNone(self.ll.get(3))
+        with self.assertRaises(IndexError) as context:
+            self.ll.get(3)
+            self.assertTrue("Index is out of range" in context.exception)
 
-    def test_pop(self):
-        self.assertIsNone(self.ll.pop(0))
+    def test_pop(self) -> None:
+        with self.assertRaises(IndexError) as context:
+            self.ll.pop(0)
+            self.assertTrue("Index is out of range" in context.exception)
         self.ll.append(1)
         self.assertEqual(self.ll.pop(0), 1)
-        self.assertIsNone(self.ll.pop(1))
+        with self.assertRaises(IndexError) as context:
+            self.ll.pop(1)
+            self.assertTrue("Index is out of range" in context.exception)
         self.ll.append(1)
         self.ll.append(2)
         self.assertEqual(self.ll.pop(0), 1)
@@ -52,9 +63,11 @@ class TestLinkedList(unittest.TestCase):
         self.ll.add_first(1)
         self.assertEqual(self.ll.pop(0), 1)
         self.assertEqual(self.ll.pop(1), 3)
-        self.assertIsNone(self.ll.pop(2))
+        with self.assertRaises(IndexError) as context:
+            self.ll.pop(2)
+            self.assertTrue("Index is out of range" in context.exception)
 
-    def test_clear(self):
+    def test_clear(self) -> None:
         self.assertEqual(len(self.ll), 0)
         self.ll.append(1)
         self.assertEqual(len(self.ll), 1)
@@ -65,18 +78,8 @@ class TestLinkedList(unittest.TestCase):
         self.ll.clear()
         self.assertEqual(len(self.ll), 0)
 
-    def test_append_list(self):
-        self.ll.append_list([])
-        self.assertEqual(self.ll.__str__(), "[]")
-        self.ll.append_list(123)
-        self.assertEqual(self.ll.__str__(), "[]")
-        self.ll.append_list([1, 2, 3])
-        self.assertEqual(self.ll.__str__(), "[1, 2, 3]")
-        self.ll.append_list([3, 2, 1])
-        self.assertEqual(self.ll.__str__(), "[1, 2, 3, 3, 2, 1]")
-
-    def test_big_test(self):
-        test_case = 1_000_00
+    def test_big_test(self) -> None:
+        test_case = 100_000
         for i in range(test_case):
             self.ll.add_first(i)
         for i in reversed(range(test_case)):

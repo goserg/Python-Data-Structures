@@ -6,7 +6,7 @@ class TestStack(unittest.TestCase):
     def setUp(self) -> None:
         self.stack = Stack()
 
-    def test_pop(self):
+    def test_pop(self) -> None:
         self.stack.stack = [1]
         self.assertEqual(self.stack.pop(), 1)
         self.assertEqual(self.stack.stack, [])
@@ -17,7 +17,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.pop(), 3)
         self.assertEqual(self.stack.stack, [1, 2])
 
-    def test_push(self):
+    def test_push(self) -> None:
         self.stack.push(1)
         self.assertEqual(self.stack.stack, [1])
         self.stack.push(2.0)
@@ -25,7 +25,7 @@ class TestStack(unittest.TestCase):
         self.stack.push("3")
         self.assertEqual(self.stack.stack, [1, 2.0, "3"])
 
-    def test_peek(self):
+    def test_peek(self) -> None:
         self.assertIsNone(self.stack.peek())
         self.stack.stack = [1]
         self.assertEqual(self.stack.peek(), 1)
@@ -33,7 +33,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.peek(), 3)
         self.assertEqual(self.stack.stack, [1, 2, 3])
 
-    def test_search(self):
+    def test_search(self) -> None:
         self.assertIsNone(self.stack.search(1))
         self.stack.stack = [1]
         self.assertEqual(self.stack.search(1), 1)
@@ -42,28 +42,28 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.stack.search(2), 2)
         self.assertEqual(self.stack.search(3), 1)
 
-    def test_is_empty(self):
+    def test_is_empty(self) -> None:
         self.assertTrue(self.stack.is_empty())
         self.stack.stack = [1]
         self.assertFalse(self.stack.is_empty())
         self.stack.stack = [1, 2, 3]
         self.assertFalse(self.stack.is_empty())
 
-    def test_clear(self):
+    def test_clear(self) -> None:
         self.stack.stack = [1, 2, 3]
         self.stack.clear()
         self.assertEqual(self.stack.stack, [])
 
-    def test___repr__(self):
+    def test___repr__(self) -> None:
         self.stack.stack = [1, 2, 3]
         self.assertEqual(self.stack.__repr__(), "[1, 2, 3]")
 
-    def test___len__(self):
+    def test___len__(self) -> None:
         self.stack.stack = [1, 2, 3]
         self.assertEqual(len(self.stack), 3)
 
-    def test_big_test(self):
-        test_case = 1_000_000
+    def test_big_test(self) -> None:
+        test_case = 100_000
         for i in range(test_case):
             self.stack.push(i)
         for i in reversed(range(test_case)):

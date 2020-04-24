@@ -1,20 +1,23 @@
+from __future__ import annotations
+from typing import Any, Optional
+
+
 class _Node:
-    def __init__(self, data=None):
-        self.next = None
+    __slots__ = ("next", "data")
+
+    def __init__(self, data: Any = None) -> None:
+        self.next: Optional[_Node] = None
         self.data = data
 
 
 class CircularLinkedList:
-    def __init__(self):
-        """
-        Constructor for a circular linked list.
+    __slots__ = ("tail", "size")
 
-        No arguments.
-        """
-        self.tail = None
+    def __init__(self) -> None:
+        self.tail: Optional[_Node] = None
         self.size = 0
 
-    def add_first(self, data) -> None:
+    def add_first(self, data: Any) -> None:
         """
         Places new 'data' at the beginning of the list.
         Time complexity = O(1).
@@ -31,7 +34,7 @@ class CircularLinkedList:
             self.tail.next = new_node
         self.size += 1
 
-    def append(self, data) -> None:
+    def append(self, data: Any) -> None:
         """
         Places new 'data' at the end of the list.
         Time complexity = O(1).
@@ -48,7 +51,7 @@ class CircularLinkedList:
         self.tail = new_node
         self.size += 1
 
-    def step(self, n=1) -> None:
+    def step(self, n: int = 1) -> None:
         """
         Rotates the list by moving tail pointer forward for n steps.
 
@@ -59,17 +62,18 @@ class CircularLinkedList:
             for _ in range(n):
                 self.tail = self.tail.next
 
-    def get(self, index: int):
+    def get(self, index: int) -> None:
         """
         Returns data with specified index.
         Time complexity = O(n).
+
+        Raises: IndexError exception
 
         Arguments:
             index -- integer (0 <= index < len()).
         """
         if index < 0 or index > self.size - 1:
-            print("ERROR: 'get' index {} is out of range".format(index))
-            return
+            raise IndexError("Index is out of range")
         if self.size == 1:
             return self.tail.data
         count = 0
@@ -79,18 +83,19 @@ class CircularLinkedList:
             count += 1
         return current.data
 
-    def pop(self, index: int):
+    def pop(self, index: int) -> None:
         """
         Returns data with specified index
         and erases this data from the list.
         Time complexity = O(n).
 
+        Raises: IndexError exception
+
         Arguments:
             index -- integer (0 <= index < len()).
         """
         if index < 0 or index > self.size - 1:
-            print("ERROR: 'get' index {} is out of range".format(index))
-            return
+            raise IndexError("Index is out of range")
         self.size -= 1
         if self.size == 0:
             ret = self.tail.data
@@ -114,19 +119,10 @@ class CircularLinkedList:
         return ret
 
     def clear(self) -> None:
-        """
-        Clear the list.
-
-        No arguments.
-        """
+        """Clear the list."""
         self.__init__()
 
     def __repr__(self) -> str:
-        """
-        Returns string representation of the list.
-
-        No arguments.
-        """
         circular_list = []
         if self.size == 0:
             return "[]"
@@ -138,9 +134,4 @@ class CircularLinkedList:
         return str(circular_list)
 
     def __len__(self) -> int:
-        """
-        Returns length of list.
-
-        No arguments.
-        """
         return self.size

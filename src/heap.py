@@ -1,7 +1,11 @@
-class Heap:
-    heap = []
+from typing import Optional, Union, List
 
-    def append(self, data):
+
+class Heap:
+    __slots__ = "heap"
+    heap: List[Union[int, float]]
+
+    def append(self, data: Union[int, float]) -> None:
         """
         Add data to heap.
         Time complexity = O(log n).
@@ -12,7 +16,7 @@ class Heap:
         self.heap.append(data)
         self._heap_up()
 
-    def peek(self):
+    def peek(self) -> Optional[Union[int, float]]:
         """
         Return data from top of heap.
         Return None if heap is empty.
@@ -22,7 +26,7 @@ class Heap:
             return None
         return self.heap[0]
 
-    def pop(self):
+    def pop(self) -> Optional[Union[int, float]]:
         """
         Return data prom the top and remove it from heap.
         Return None if heap is empty.
@@ -37,7 +41,7 @@ class Heap:
         self._heap_down()
         return ret
 
-    def _heap_down(self):
+    def _heap_down(self) -> None:
         i = 0
         while (2 * i + 1) < len(self.heap):
             has_right = (2 * i + 2) < len(self.heap)
@@ -47,30 +51,30 @@ class Heap:
             if self.heap[i] < self.heap[smaller]:
                 return
             else:
-                self.heap[i], self.heap[smaller] = self.heap[smaller],  self.heap[i]
+                self.heap[i], self.heap[smaller] = self.heap[smaller], self.heap[i]
             i = smaller
 
-    def _heap_up(self):
+    def _heap_up(self) -> None:
         i = len(self.heap) - 1
         parent_i = (i - 1) // 2
         while parent_i >= 0 and self.heap[parent_i] > self.heap[i]:
             self.heap[parent_i], self.heap[i] = self.heap[i], self.heap[parent_i]
             i, parent_i = parent_i, (parent_i - 1) // 2
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """
         Return False if heap is empty else return True.
         """
         return True if len(self.heap) == 0 else False
 
-    def clear(self):
+    def clear(self) -> None:
         """
         Remove all data from heap.
         """
         self.heap = []
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str(self.heap)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.heap)

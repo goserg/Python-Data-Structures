@@ -1,10 +1,14 @@
-class _Node:
-    """ Internal class. Not for public use. """
+from __future__ import annotations
+from typing import Any, Optional
 
-    def __init__(self, data=None):
+
+class _Node:
+    __slots__ = ("data", "next", "prev")
+
+    def __init__(self, data: Any = None) -> None:
         self.data = data
-        self.next = None
-        self.prev = None
+        self.next: Optional[_Node] = None
+        self.prev: Optional[_Node] = None
 
 
 class Queue:
@@ -13,18 +17,16 @@ class Queue:
     Time complexity O(1) for push, peek and pop methods.
     Time complexity O(n) for search method.
     """
-    def __init__(self):
-        """
-        Constructor for a queue.
 
-        No arguments.
-        """
+    __slots__ = ("head", "tail", "size")
+
+    def __init__(self) -> None:
         self.head = _Node()
         self.tail = _Node()
         self.tail.prev = self.head
         self.size = 0
 
-    def push(self, data):
+    def push(self, data: Any) -> None:
         """
         Add data to the queue.
         Time complexity = O(1).
@@ -39,7 +41,7 @@ class Queue:
             self.tail.prev = new_node
         self.size += 1
 
-    def pop(self):
+    def pop(self) -> Any:
         """
         Return data prom the top and remove it from the queue.
         Return None if queue is empty.
@@ -53,7 +55,7 @@ class Queue:
             return ret
         return None
 
-    def peek(self):
+    def peek(self) -> Any:
         """
         Return data from top the queue.
         Return None if queue is empty.
@@ -63,7 +65,7 @@ class Queue:
             return self.tail.prev.data
         return None
 
-    def search(self, data):
+    def search(self, data: Any) -> Optional[int]:
         """
         Search for a data in the queue and get its distance from the top.
         This method starts the count of the position from 1.
@@ -81,13 +83,13 @@ class Queue:
             current = current.prev
         return None
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """
         Return False if the queue is empty else return True.
         """
         return True if self.size == 0 else False
 
-    def clear(self):
+    def clear(self) -> None:
         """
         Remove all data from the stack.
         """
@@ -95,12 +97,7 @@ class Queue:
         self.head.next = None
         self.size = 0
 
-    def __str__(self):
-        """
-        Returns string representation of queue.
-
-        No arguments.
-        """
+    def __repr__(self) -> str:
         queue = []
         current = self.head
         while current.next:
@@ -108,10 +105,5 @@ class Queue:
             queue.append(current.data)
         return str(queue)
 
-    def __len__(self):
-        """
-        Returns length of queue.
-
-        No arguments.
-        """
+    def __len__(self) -> int:
         return self.size

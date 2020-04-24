@@ -1,18 +1,26 @@
+from __future__ import annotations
+from typing import Any, List, Final
+
+
 import hashlib
 
-MAX_LOAD_FACTOR = 0.5
-INITIAL_SIZE = 1
+MAX_LOAD_FACTOR: Final = 0.5
+INITIAL_SIZE: Final = 1
 
 
 class _Data:
+    __slots__ = ("key", "value")
+
     def __init__(self, key, value) -> None:
         self.key = key
         self.value = value
 
 
 class HashTable:
+    __slots__ = ("table", "size")
+
     @staticmethod
-    def from_keys(*args):
+    def from_keys(*args) -> HashTable:
         """
         Returns Hash Table filled with data from args
 
@@ -58,7 +66,7 @@ class HashTable:
         for key, value in kwargs.items():
             self.insert(key, value)
 
-    def insert(self, key, value=None) -> None:
+    def insert(self, key: Any, value: Any = None) -> None:
         """
         Insert key with a value. If key is in the hash table updates the value of that key.
 
@@ -77,7 +85,7 @@ class HashTable:
     def __setitem__(self, key, value) -> None:
         self.insert(key, value)
 
-    def search(self, key):
+    def search(self, key: Any) -> Any:
         """
         Return the value for key if key is in the hash table, else None.
 
@@ -88,10 +96,10 @@ class HashTable:
             if data.key == key:
                 return data.value
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         return self.search(key)
 
-    def pop(self, key) -> None:
+    def pop(self, key: Any) -> Any:
         """
         Return the value for key if key is in the hash table, else None.
         Removes key from the hash table.
@@ -105,12 +113,10 @@ class HashTable:
                 self.size -= 1
                 return value
 
-    def keys(self) -> list:
+    def keys(self) -> List[Any]:
         """
         Return a copy of the hash table’s list of keys.
         Time complexity = O(n).
-
-        No arguments.
         """
         keys = []
         for i in self.table:
@@ -118,13 +124,11 @@ class HashTable:
                 keys.append(j.key)
         return keys
 
-    def values(self) -> list:
+    def values(self) -> List[Any]:
         """
         Return a copy of the hash table’s list of values.
 
         Time complexity = O(n).
-
-        No arguments.
         """
         values = []
         for i in self.table:
@@ -137,12 +141,10 @@ class HashTable:
         Clears hash table's data.
 
         Time complexity = O(1).
-
-        No arguments.
         """
         self.__init__()
 
-    def _get_index_and_hash(self, key) -> int:
+    def _get_index_and_hash(self, key: Any) -> int:
         encode = hashlib.md5()
         encode.update(str(key).encode())
         hashed = encode.hexdigest()
@@ -170,11 +172,11 @@ class HashTable:
         for i in self.table:
             for j in i:
                 a = j.key
-                a = ''.join(["'", a, "'"]) if isinstance(a, str) else str(a)
+                a = "".join(["'", a, "'"]) if isinstance(a, str) else str(a)
                 b = j.value
-                b = ''.join(["'", b, "'"]) if isinstance(b, str) else str(b)
-                data.append(': '.join([a, b]))
-        return '{' + ', '.join(data) + '}'
+                b = "".join(["'", b, "'"]) if isinstance(b, str) else str(b)
+                data.append(": ".join([a, b]))
+        return "{" + ", ".join(data) + "}"
 
     def __len__(self) -> int:
         return self.size

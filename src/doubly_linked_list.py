@@ -1,24 +1,25 @@
-class _Node:
-    """ Internal class. Not for public use. """
+from __future__ import annotations
+from typing import Any, Optional
 
-    def __init__(self, data=None):
+
+class _Node:
+    __slots__ = ("data", "next", "prev")
+
+    def __init__(self, data: Any = None):
         self.data = data
-        self.next = None
-        self.prev = None
+        self.next: Optional[_Node] = None
+        self.prev: Optional[_Node] = None
 
 
 class DoublyLinkedList:
-    def __init__(self):
-        """
-        Constructor for a doubly linked list.
+    __slots__ = ("head", "tail", "size")
 
-        No arguments.
-        """
-        self.head = None
-        self.tail = None
+    def __init__(self):
+        self.head: Optional[_Node] = None
+        self.tail: Optional[_Node] = None
         self.size = 0
 
-    def add_first(self, data):
+    def add_first(self, data: Any) -> None:
         """
         Places new 'data' at the beginning of the list.
         Time complexity = O(1).
@@ -36,7 +37,7 @@ class DoublyLinkedList:
         self.head = new_node  # link heat fo new_node first
         self.size += 1
 
-    def append(self, data):
+    def append(self, data: Any) -> None:
         """
         Places new 'data' at the end of the list.
         Time complexity = O(1).
@@ -53,21 +54,22 @@ class DoublyLinkedList:
         self.tail = new_node
         self.size += 1
 
-    def get(self, index):
+    def get(self, index: int) -> Any:
         """
         Returns data with specified index.
         Time complexity = O(n).
+
+        Raises: IndexError exception
 
         Arguments:
             index -- integer (0 <= index < len()).
         """
         if index >= self.size or index < 0:
-            print("ERROR: 'get' index {} is out of range".format(index))
-            return
+            raise IndexError("Index is out of range")
         current = self._find(index)
         return current.data
 
-    def _find(self, index):
+    def _find(self, index: int) -> _Node:
         count = 0
         current_node = self.head
         while count < index:
@@ -75,11 +77,13 @@ class DoublyLinkedList:
             count += 1
         return current_node
 
-    def pop(self, index):
+    def pop(self, index: int) -> Any:
         """
         Returns data with specified index
         and erases this data from the list.
         Time complexity = O(n).
+
+        Raises: IndexError exception
 
         Arguments:
             index -- integer (0 <= index < len()).
@@ -87,8 +91,7 @@ class DoublyLinkedList:
         if self.size == 0:
             return
         if index >= self.size or index < 0:
-            print("ERROR: 'get' index {} is out of range".format(index))
-            return
+            raise IndexError("Index is out of range")
         current = self._find(index)
         data = current.data
         if self.size == 1:  # one element list
@@ -106,20 +109,13 @@ class DoublyLinkedList:
         self.size -= 1
         return data
 
-    def clear(self):
+    def clear(self) -> None:
         """
         Clear the list.
-
-        No arguments.
         """
         self.__init__()
 
     def __repr__(self) -> str:
-        """
-        Returns string representation of the list.
-
-        No arguments.
-        """
         double_list = []
         current_node = self.head
         while current_node:
@@ -127,10 +123,5 @@ class DoublyLinkedList:
             current_node = current_node.next
         return str(double_list)
 
-    def __len__(self):
-        """
-        Returns length of list.
-
-        No arguments.
-        """
+    def __len__(self) -> int:
         return self.size
