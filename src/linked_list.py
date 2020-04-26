@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Optional
+from typing import Any, Optional, Tuple
 
 
 class _Node:
@@ -14,9 +14,6 @@ class LinkedList:
     __slots__ = ("head", "size")
 
     def __init__(self) -> None:
-        """
-        Constructor for a linked list.
-        """
         self.head = _Node()
         self.size = 0
 
@@ -57,14 +54,7 @@ class LinkedList:
         Arguments:
             index -- integer (0 <= index < len()).
         """
-        if index >= self.size:
-            raise IndexError("Index is out of range")
-        current_index = 0
-        current = self.head
-        while current_index <= index:
-            current_index += 1
-            current = current.next
-        return current.data
+        return self._find(index)[0].data
 
     def pop(self, index: int) -> None:
         """
@@ -77,6 +67,16 @@ class LinkedList:
         Arguments:
             index -- integer (0 <= index < len()).
         """
+        current, last = self._find(index)
+        ret = last.next.data
+        last.next = current.next
+        self.size -= 1
+        return ret
+
+    def _find(self, index: int) -> Tuple[_Node, _Node]:
+        """
+        :returns: list[index], list[index-1] nodes
+        """
         if index < 0 or index >= self.size:
             raise IndexError("Index is out of range")
         current_index = 0
@@ -86,10 +86,7 @@ class LinkedList:
             current_index += 1
             last = current
             current = current.next
-        ret = last.next.data
-        last.next = current.next
-        self.size -= 1
-        return ret
+        return current, last
 
     def clear(self) -> None:
         """
@@ -97,6 +94,12 @@ class LinkedList:
         """
         self.head.next = None
         self.size = 0
+
+    def __getitem__(self, item: int) -> Any:
+        return self._find(item)[0].data
+
+    def __setitem__(self, key: int, value: Any) -> None:
+        self._find(key)[0].data = value
 
     def __repr__(self) -> str:
         linked_list = []

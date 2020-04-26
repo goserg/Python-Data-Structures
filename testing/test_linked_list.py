@@ -29,6 +29,9 @@ class TestLinkedList(unittest.TestCase):
         self.ll.append(1)
         self.assertEqual(self.ll.get(0), 1)
         with self.assertRaises(IndexError) as context:
+            self.ll.get(-1)
+            self.assertTrue("Index is out of range" in context.exception)
+        with self.assertRaises(IndexError) as context:
             self.ll.get(1)
             self.assertTrue("Index is out of range" in context.exception)
         self.ll.append(2)
@@ -84,6 +87,14 @@ class TestLinkedList(unittest.TestCase):
             self.ll.add_first(i)
         for i in reversed(range(test_case)):
             self.assertEqual(self.ll.pop(0), i)
+
+    def test_iterable(self) -> None:
+        for i in range(10):
+            self.ll.append(i)
+        for i in self.ll:
+            self.assertEqual(self.ll[i], i)
+        self.ll[5] = 6
+        self.assertEqual(self.ll[5], 6)
 
 
 if __name__ == "__main__":

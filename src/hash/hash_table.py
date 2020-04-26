@@ -68,7 +68,8 @@ class HashTable:
 
     def insert(self, key: Any, value: Any = None) -> None:
         """
-        Insert key with a value. If key is in the hash table updates the value of that key.
+        Insert key with a value. If key is in the hash table updates the value
+        of that key.
 
         Time complexity = O(1).
         """
