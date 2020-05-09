@@ -1,4 +1,5 @@
 from __future__ import annotations
+import reprlib
 from typing import Any, Optional
 
 
@@ -116,6 +117,14 @@ class DoublyLinkedList:
         self.__init__()
 
     def __repr__(self) -> str:
+        double_list = []
+        current_node = self.head
+        while current_node:
+            double_list.append(current_node.data)
+            current_node = current_node.next
+        return f"{self.__class__.__name__} {reprlib.repr(double_list)}"
+
+    def __str__(self) -> str:
         double_list = []
         current_node = self.head
         while current_node:

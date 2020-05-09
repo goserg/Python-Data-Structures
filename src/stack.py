@@ -1,3 +1,4 @@
+import reprlib
 from typing import Any, List, Optional
 
 
@@ -59,6 +60,9 @@ class Stack:
         self.stack = []
 
     def __repr__(self) -> str:
+        return f"{self.__class__.__name__} {reprlib.repr(self.stack)}"
+
+    def __str__(self) -> str:
         return str(self.stack)
 
     def __len__(self) -> int:

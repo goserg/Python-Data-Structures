@@ -54,9 +54,9 @@ class TestStack(unittest.TestCase):
         self.stack.clear()
         self.assertEqual(self.stack.stack, [])
 
-    def test___repr__(self) -> None:
+    def test___str__(self) -> None:
         self.stack.stack = [1, 2, 3]
-        self.assertEqual(self.stack.__repr__(), "[1, 2, 3]")
+        self.assertEqual(self.stack.__str__(), "[1, 2, 3]")
 
     def test___len__(self) -> None:
         self.stack.stack = [1, 2, 3]
@@ -69,6 +69,13 @@ class TestStack(unittest.TestCase):
         for i in reversed(range(test_case)):
             self.assertEqual(self.stack.pop(), i)
         self.assertIsNone(self.stack.pop())
+
+    def test_repr(self) -> None:
+        for i in range(6):
+            self.stack.push(i)
+        self.assertEqual(self.stack.__repr__(), "Stack [0, 1, 2, 3, 4, 5]")
+        self.stack.push(6)
+        self.assertEqual(self.stack.__repr__(), "Stack [0, 1, 2, 3, 4, 5, ...]")
 
 
 if __name__ == "__main__":

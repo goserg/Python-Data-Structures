@@ -1,4 +1,5 @@
 from __future__ import annotations
+import reprlib
 from typing import Any, Optional
 
 
@@ -98,6 +99,14 @@ class Queue:
         self.size = 0
 
     def __repr__(self) -> str:
+        queue = []
+        current = self.head
+        while current.next:
+            current = current.next
+            queue.append(current.data)
+        return f"{self.__class__.__name__} {reprlib.repr(queue)}"
+
+    def __str__(self) -> str:
         queue = []
         current = self.head
         while current.next:

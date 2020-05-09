@@ -8,19 +8,19 @@ class TestLinkedList(unittest.TestCase):
 
     def test_add_first(self) -> None:
         self.ll.add_first(1)
-        self.assertEqual(self.ll.__repr__(), "[1]")
+        self.assertEqual(self.ll.__str__(), "[1]")
         self.ll.add_first(2)
-        self.assertEqual(self.ll.__repr__(), "[2, 1]")
+        self.assertEqual(self.ll.__str__(), "[2, 1]")
         self.ll.add_first(3)
-        self.assertEqual(self.ll.__repr__(), "[3, 2, 1]")
+        self.assertEqual(self.ll.__str__(), "[3, 2, 1]")
 
     def test_append(self) -> None:
         self.ll.append(1)
-        self.assertEqual(self.ll.__repr__(), "[1]")
+        self.assertEqual(self.ll.__str__(), "[1]")
         self.ll.append(2)
-        self.assertEqual(self.ll.__repr__(), "[1, 2]")
+        self.assertEqual(self.ll.__str__(), "[1, 2]")
         self.ll.append(3)
-        self.assertEqual(self.ll.__repr__(), "[1, 2, 3]")
+        self.assertEqual(self.ll.__str__(), "[1, 2, 3]")
 
     def test_get(self) -> None:
         with self.assertRaises(IndexError) as context:
@@ -83,6 +83,13 @@ class TestLinkedList(unittest.TestCase):
             self.ll.add_first(i)
         for i in reversed(range(test_case)):
             self.assertEqual(self.ll.pop(0), i)
+
+    def test_repr(self) -> None:
+        for i in range(6):
+            self.ll.append(i)
+        self.assertEqual(self.ll.__repr__(), "DoublyLinkedList [0, 1, 2, 3, 4, 5]")
+        self.ll.append(6)
+        self.assertEqual(self.ll.__repr__(), "DoublyLinkedList [0, 1, 2, 3, 4, 5, ...]")
 
 
 if __name__ == "__main__":

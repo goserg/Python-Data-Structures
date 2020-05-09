@@ -1,3 +1,4 @@
+import reprlib
 from typing import Optional, Union, List
 
 
@@ -74,6 +75,9 @@ class Heap:
         self.heap = []
 
     def __repr__(self) -> str:
+        return f"{self.__class__.__name__} {reprlib.repr(self.heap)}"
+
+    def __str__(self) -> str:
         return str(self.heap)
 
     def __len__(self) -> int:

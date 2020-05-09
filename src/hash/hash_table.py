@@ -168,7 +168,7 @@ class HashTable:
     def _load_factor(self) -> float:
         return self.size / len(self.table)
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         data = []
         for i in self.table:
             for j in i:
@@ -177,7 +177,24 @@ class HashTable:
                 b = j.value
                 b = "".join(["'", b, "'"]) if isinstance(b, str) else str(b)
                 data.append(": ".join([a, b]))
-        return "{" + ", ".join(data) + "}"
+        return f'{{{", ".join(data)}}}'
+
+    def __repr__(self) -> str:
+        data = []
+        counter = 0
+        max_counter = 6
+        for i in self.table:
+            for j in i:
+                if counter == max_counter:
+                    data.append("...")
+                    return f'{self.__class__.__name__} {{{", ".join(data)}}}'
+                a = j.key
+                a = "".join(["'", a, "'"]) if isinstance(a, str) else str(a)
+                b = j.value
+                b = "".join(["'", b, "'"]) if isinstance(b, str) else str(b)
+                data.append(": ".join([a, b]))
+                counter += 1
+        return f'{self.__class__.__name__} {{{", ".join(data)}}}'
 
     def __len__(self) -> int:
         return self.size

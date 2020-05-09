@@ -1,4 +1,5 @@
 from __future__ import annotations
+import reprlib
 from typing import Any, Optional, Tuple
 
 
@@ -102,6 +103,14 @@ class LinkedList:
         self._find(key)[0].data = value
 
     def __repr__(self) -> str:
+        linked_list = []
+        current = self.head
+        while current.next:
+            current = current.next
+            linked_list.append(current.data)
+        return f"{self.__class__.__name__} {reprlib.repr(linked_list)}"
+
+    def __str__(self) -> str:
         linked_list = []
         current = self.head
         while current.next:

@@ -6,20 +6,20 @@ class TestQueue(unittest.TestCase):
     def setUp(self) -> None:
         self.queue = Queue()
 
-    def test___repr__(self) -> None:
-        self.assertEqual(self.queue.__repr__(), "[]")
+    def test___str__(self) -> None:
+        self.assertEqual(self.queue.__str__(), "[]")
         self.queue.push(1)
-        self.assertEqual(self.queue.__repr__(), "[1]")
+        self.assertEqual(self.queue.__str__(), "[1]")
         self.queue.push(2)
-        self.assertEqual(self.queue.__repr__(), "[2, 1]")
+        self.assertEqual(self.queue.__str__(), "[2, 1]")
         self.queue.push(3)
-        self.assertEqual(self.queue.__repr__(), "[3, 2, 1]")
+        self.assertEqual(self.queue.__str__(), "[3, 2, 1]")
 
     def test_push(self) -> None:
         self.queue.push(1)
-        self.assertEqual(self.queue.__repr__(), "[1]")
+        self.assertEqual(self.queue.__str__(), "[1]")
         self.queue.push(2)
-        self.assertEqual(self.queue.__repr__(), "[2, 1]")
+        self.assertEqual(self.queue.__str__(), "[2, 1]")
 
     def test_pop(self) -> None:
         self.assertIsNone(self.queue.pop())
@@ -75,6 +75,13 @@ class TestQueue(unittest.TestCase):
         for i in range(test_case):
             self.assertEqual(self.queue.pop(), i)
         self.assertIsNone(self.queue.pop())
+
+    def test_repr(self) -> None:
+        for i in range(6):
+            self.queue.push(i)
+        self.assertEqual(self.queue.__repr__(), "Queue [5, 4, 3, 2, 1, 0]")
+        self.queue.push(6)
+        self.assertEqual(self.queue.__repr__(), "Queue [6, 5, 4, 3, 2, 1, ...]")
 
 
 if __name__ == "__main__":

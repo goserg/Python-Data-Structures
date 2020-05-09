@@ -1,4 +1,5 @@
 from __future__ import annotations
+import reprlib
 from typing import Any, Optional
 
 
@@ -123,6 +124,17 @@ class CircularLinkedList:
         self.__init__()
 
     def __repr__(self) -> str:
+        circular_list = []
+        if self.size == 0:
+            return f"{self.__class__.__name__} []"
+        current = self.tail
+        while self.tail != current.next:
+            circular_list.append(current.next.data)
+            current = current.next
+        circular_list.append(self.tail.data)
+        return f"{self.__class__.__name__} {reprlib.repr(circular_list)}"
+
+    def __str__(self) -> str:
         circular_list = []
         if self.size == 0:
             return "[]"

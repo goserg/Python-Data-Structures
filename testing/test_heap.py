@@ -44,6 +44,14 @@ class TestHeap(unittest.TestCase):
         for i in range(test_case):
             self.assertEqual(self.heap.pop(), i)
 
+    def test_repr(self) -> None:
+        self.heap.append(4)
+        self.heap.append(5)
+        self.heap.append(6)
+        self.assertEqual(self.heap.__repr__(), "Heap [1, 3, 2, 4, 5, 6]")
+        self.heap.append(7)
+        self.assertEqual(self.heap.__repr__(), "Heap [1, 3, 2, 4, 5, 6, ...]")
+
 
 if __name__ == "__main__":
     unittest.main()
