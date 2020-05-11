@@ -1,5 +1,6 @@
 from __future__ import annotations
 import reprlib
+from collections.abc import MutableSequence
 from typing import Any, Optional, Tuple
 
 
@@ -11,7 +12,7 @@ class _Node:
         self.next: Optional[_Node] = None
 
 
-class LinkedList:
+class LinkedList(MutableSequence):
     __slots__ = ("head", "size")
 
     def __init__(self) -> None:
@@ -31,20 +32,6 @@ class LinkedList:
         self.head.next = new_node
         self.size += 1
 
-    def append(self, data: Any) -> None:
-        """
-        Places new 'data' at the end of the linked list.
-        Time complexity = O(n).
-
-        Arguments:
-            data -- any data.
-        """
-        current = self.head
-        while current.next:
-            current = current.next
-        current.next = _Node(data)
-        self.size += 1
-
     def get(self, index: int) -> None:
         """
         Returns data with specified index.
@@ -57,22 +44,19 @@ class LinkedList:
         """
         return self._find(index)[0].data
 
-    def pop(self, index: int) -> None:
+    def _add_last(self, data: Any) -> None:
         """
-        Returns data with specified index
-        and erases this data from linked list.
+        Places new 'data' at the end of the linked list.
         Time complexity = O(n).
 
-        Raises: IndexError exception
-
         Arguments:
-            index -- integer (0 <= index < len()).
+            data -- any data.
         """
-        current, last = self._find(index)
-        ret = last.next.data
-        last.next = current.next
-        self.size -= 1
-        return ret
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = _Node(data)
+        self.size += 1
 
     def _find(self, index: int) -> Tuple[_Node, _Node]:
         """
@@ -99,8 +83,11 @@ class LinkedList:
     def __getitem__(self, item: int) -> Any:
         return self._find(item)[0].data
 
-    def __setitem__(self, key: int, value: Any) -> None:
-        self._find(key)[0].data = value
+    def __setitem__(self, index: int, data: Any) -> None:
+        if index == self.size:
+            self._add_last(data)
+            return
+        self._find(index)[0].data = data
 
     def __repr__(self) -> str:
         linked_list = []
@@ -120,3 +107,18 @@ class LinkedList:
 
     def __len__(self) -> int:
         return self.size
+
+    def __delitem__(self, index: int) -> None:
+        current, last = self._find(index)
+        last.next = current.next
+        self.size -= 1
+
+    def insert(self, index: int, data: Any) -> None:
+        if index == self.size:
+            self._add_last(data)
+            return
+        new_node = _Node(data)
+        current, last = self._find(index)
+        new_node.next = current
+        last.next = new_node
+        self.size += 1

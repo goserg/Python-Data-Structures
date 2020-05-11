@@ -4,11 +4,11 @@ Python learning project.
 My implementation of some basic Data Structures from scratch.
 
 1. Linked List:  
-- add_first  
-- append  
-- get  
-- pop  
-- clear  
+Public methods:  
+- add_first(data)
+- get(index)  
+- clear()  
+- methods from collection.MutableSequence
 	
 2. Stack(list based):  
 - push  
