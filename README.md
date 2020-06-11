@@ -39,7 +39,7 @@ Public methods:
 - search  
 - pop  
 - clear  
-- [] sintax
+- [] syntax
 
 6. Doubly Linked List  
 - add_first  
