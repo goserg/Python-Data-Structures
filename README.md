@@ -56,6 +56,8 @@ Public methods:
 - clear  
 - step  
 
+8. Dynamic Array (List-like)
+
 
 Time complexity:  
 
