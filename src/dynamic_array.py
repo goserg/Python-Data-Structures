@@ -73,29 +73,3 @@ class DynamicArray(MutableSequence):
     def _create_array(self, capacity=None) -> ctypes.Array:
         capacity = capacity or self.capacity
         return (capacity * ctypes.py_object)()
-
-
-if __name__ == "__main__":
-    ar = DynamicArray()
-    lst = []
-    for n in range(100):
-        ar.append(n)
-        lst.append(n)
-    assert ar.pop() == lst.pop()
-    assert ar.pop(0) == lst.pop(0)
-    assert ar.pop(-3) == lst.pop(-3)
-    ar.insert(10, 30)
-    lst.insert(10, 30)
-    ar[10] = 42
-    lst[10] = 42
-    ar[-50] = "test"
-    lst[-50] = "test"
-    assert ar.index(30) == lst.index(30)
-    ar.reverse()
-    lst.reverse()
-    assert len(ar) == len(lst)
-    assert str(ar) == str(lst)
-    assert repr(ar) == repr(lst)
-
-
-
