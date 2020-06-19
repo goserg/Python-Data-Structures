@@ -1,4 +1,5 @@
 import unittest
+
 from src.linked_list import LinkedList
 
 

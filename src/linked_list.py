@@ -1,6 +1,6 @@
 from __future__ import annotations
-import reprlib
 from collections.abc import MutableSequence
+import reprlib
 from typing import Any, Optional, Tuple
 
 
